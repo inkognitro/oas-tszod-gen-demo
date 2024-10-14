@@ -6,8 +6,20 @@
     "node": ">=18.0.0"
   },
   "devDependencies": {
+    "@types/node": "20.12.7",
+    "@types/qs": "^6.9.16",
     "gts": "^5.3.1",
-    "typescript": "^5.4.3",
-    "@types/node": "20.12.7"
+    "oas-tszod-gen": "^0.0.2",
+    "typescript": "^5.4.3"
+  },
+  "scripts": {
+    "api:generate": "node api.generate.js && eslint --fix --quiet ./src/generated-api",
+    "build": "tsc",
+    "startDemo": "node dist/index.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "qs": "^6.13.0",
+    "zod": "^3.23.8"
   }
 }
