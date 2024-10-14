@@ -1,17 +1,20 @@
 import {
   AxiosRequestHandler,
   getRevealedResponseOrReject,
+  ZodValidationRequestHandler,
 } from './generated-api/core';
 import axios from 'axios';
 import {parse} from 'qs';
 import {getAvgPrice} from './generated-api/api/v3';
 
-const requestHandler = new AxiosRequestHandler({
+const httpRequestHandler = new AxiosRequestHandler({
   axios: axios.create({baseURL: 'https://api.binance.com'}),
   urlDecodeQueryString: queryString => {
     return parse(queryString);
   },
 });
+
+const requestHandler = new ZodValidationRequestHandler(httpRequestHandler);
 
 async function queryEthereumPrice(): Promise<string> {
   const response = await getRevealedResponseOrReject(
